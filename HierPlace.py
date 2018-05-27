@@ -185,7 +185,7 @@ def pack(group):
     # and bottom-right (BR) corners of that module become potential points where
     # the lower-left corner of the next-largest module can be placed.
     # The point is chosen based upon how much the bounding box of the
-    # currently-placed modules will expand. When the modules is placed,
+    # currently-placed modules will expand. When a module is placed,
     # the placement point is removed and the TL and BR corners
     # of the just-placed module are added to the list of points.
     # This proceeds until all the modules are placed in order of decreasing area.
@@ -220,8 +220,6 @@ def pack(group):
 
                 # Move module bottom-left corner to the placement point.
                 module.set_bl_position(pt)
-
-                Refresh()
 
                 # Check to see if the module touches any of the other modules in the packed group.
                 for pm in packed_modules:
