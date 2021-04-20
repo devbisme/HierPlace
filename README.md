@@ -56,6 +56,10 @@ None yet. Why not be the first?
 
 ## History
 
+### 0.2.0 (2018-05-28)
+
+* Modifications to run on KiCAD 5.99 as well as earlier versions.
+
 ### 0.1.0 (2018-05-28)
 
 * First release.
