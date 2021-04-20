@@ -49,13 +49,19 @@ class Module(object):
     @property
     def hier_level(self):
         '''Return a string with the hierarchical level of the module.'''
-        path_parts = self.m.GetPath().AsString().split('/')
+        try:
+            path_parts = self.m.GetPath().AsString().split('/')
+        except AttributeError:
+            path_parts = self.m.GetPath().split('/')
         return '/'.join(path_parts[:-1])
 
     @property
     def bbox(self):
         '''Return an EDA_RECT with the bounding box of the module.'''
-        bb = self.m.GetBoundingBox()
+        try:
+            bb = self.m.GetBoundingBox()
+        except AttributeError:
+            bb = self.m.GetFootprintRect()
         bb.Inflate(MODULE_SPACING)
         return bb
 
@@ -262,7 +268,10 @@ class HierPlace(ActionPlugin):
 
     def Run(self):
         # Get all the modules from the current PCB and store them as Modules.
-        modules = [Module(m) for m in GetBoard().GetFootprints()]
+        try:
+            modules = [Module(m) for m in GetBoard().GetFootprints()]
+        except AttributeError:
+            modules = [Module(m) for m in GetBoard().GetModules()]
 
         # Get modules in the PCB that are selected.
         # If no modules are selected, then operate on all the modules in the PCB.
