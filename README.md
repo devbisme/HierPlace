@@ -61,7 +61,7 @@ None yet. Why not be the first?
 * Modifications to allow kinet2pcb to use HierPlace to do an
   initial placement of parts.
 
-### 0.2.0 (2018-05-28)
+### 0.2.0 (2021-04-20)
 
 * Modifications to run on KiCAD 5.99 as well as earlier versions.
 
