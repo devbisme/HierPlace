@@ -15,7 +15,7 @@ the hierarchy in the design.
 
 ## Installation
 
-Just copy `HierPlace.py` to the `kicad/share/kicad/scripting/plugins` directory.
+On linux, just copy `HierPlace.py` to your local `~/.kicad_plugins` directory.
 
 
 ## Usage
@@ -55,6 +55,11 @@ None yet. Why not be the first?
 
 
 ## History
+
+### 0.3.0 (2020-05-19)
+
+* Modifications to allow kinet2pcb to use HierPlace to do an
+  initial placement of parts.
 
 ### 0.2.0 (2018-05-28)
 

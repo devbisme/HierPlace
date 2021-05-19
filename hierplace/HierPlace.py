@@ -26,6 +26,9 @@ Arranges components based upon the hierarchy of the design.
 """
 
 from collections import defaultdict
+
+import sys
+sys.path.append('/usr/lib/python3/dist-packages')
 from pcbnew import *
 
 # Extra spacing placed around bounding boxes of modules and groups of modules
@@ -260,6 +263,46 @@ def pack(group):
         placement_pts.extend([module.tl_corner, module.br_corner])
 
 
+def hier_place(brd=None):
+    '''
+    Remove overlaps of board parts while respecting their hierarchy.
+    '''
+
+    brd = brd or GetBoard()
+    try:
+        modules = [Module(m) for m in brd.GetFootprints()]
+    except AttributeError:
+        modules = [Module(m) for m in brd.GetModules()]
+
+    # Get modules in the PCB that are selected.
+    # If no modules are selected, then operate on all the modules in the PCB.
+    selected_modules = [m for m in modules if m.selected] or modules
+
+    # Place the modules into groups based on hierarchy.
+    groups = group_modules(selected_modules)
+
+    # Pack all the modules in each group. Then move up a level in the hierarchy
+    # and pack a group of packed modules into another packing. Proceed upward
+    # until all the levels of the hierarchy have been packed.
+    while True:
+
+        # Pack the members of each group.
+        for group in groups.values():
+            pack(group)
+
+        # If there's only one group left, then all the hierarchical levels have
+        # been packed, so we're done.
+        if len(groups) <= 1:
+            break
+
+        # Otherwise, collect the packed groups into groups at the next level
+        # of hierarchy and repeat the loop.
+        groups = group_modules(groups.values())
+
+    # Display the hierarchically-placed modules.
+    Refresh()
+
+
 class HierPlace(ActionPlugin):
     def defaults(self):
         self.name = 'HierPlace'
@@ -267,39 +310,7 @@ class HierPlace(ActionPlugin):
         self.description = 'Places components into clusters based on the hierarchical structure of the design.'
 
     def Run(self):
-        # Get all the modules from the current PCB and store them as Modules.
-        try:
-            modules = [Module(m) for m in GetBoard().GetFootprints()]
-        except AttributeError:
-            modules = [Module(m) for m in GetBoard().GetModules()]
-
-        # Get modules in the PCB that are selected.
-        # If no modules are selected, then operate on all the modules in the PCB.
-        selected_modules = [m for m in modules if m.selected] or modules
-
-        # Place the modules into groups based on hierarchy.
-        groups = group_modules(selected_modules)
-
-        # Pack all the modules in each group. Then move up a level in the hierarchy
-        # and pack a group of packed modules into another packing. Proceed upward
-        # until all the levels of the hierarchy have been packed.
-        while True:
-
-            # Pack the members of each group.
-            for group in groups.values():
-                pack(group)
-
-            # If there's only one group left, then all the hierarchical levels have
-            # been packed, so we're done.
-            if len(groups) <= 1:
-                break
-
-            # Otherwise, collect the packed groups into groups at the next level
-            # of hierarchy and repeat the loop.
-            groups = group_modules(groups.values())
-
-        # Display the hierarchically-placed modules.
-        Refresh()
+        hier_place()
 
 
 HierPlace().register()
