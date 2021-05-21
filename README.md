@@ -52,19 +52,3 @@ other sections of the circuitry.
 ### Contributors
 
 None yet. Why not be the first?
-
-
-## History
-
-### 0.3.0 (2020-05-19)
-
-* Modifications to allow kinet2pcb to use HierPlace to do an
-  initial placement of parts.
-
-### 0.2.0 (2021-04-20)
-
-* Modifications to run on KiCAD 5.99 as well as earlier versions.
-
-### 0.1.0 (2018-05-28)
-
-* First release.
