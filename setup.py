@@ -6,32 +6,24 @@ from setuptools import setup, find_packages
 
 __author__ = 'XESS Corp.'
 __email__ = 'info@xess.com'
-__version__ = '0.3.0'
+__version__ = '0.3.6'
 
 # if 'sdist' in sys.argv[1:]:
 #     with open('kinet2pcb/pckg_info.py','w') as f:
 #         for name in ['__version__','__author__','__email__']:
 #             f.write("{} = '{}'\n".format(name,locals()[name]))
 
-try:
-    with open('README.md') as readme_file:
-        readme = readme_file.read()
-except FileNotFoundError:
-    readme = ""
+with open('README.rst') as readme_file:
+    readme = readme_file.read()
 
-try:
-    with open('HISTORY.md') as history_file:
-        history = history_file.read()
-except FileNotFoundError:
-    history = ""
+with open('HISTORY.rst') as history_file:
+    history = history_file.read()
 
-requirements = [ 
-    "kinparse >= 0.1.2",
-]
+requirements = []
 
-# setup_requirements = ['pytest-runner', ]
+setup_requirements = ['pytest-runner', ]
 
-# test_requirements = ['pytest', ]
+test_requirements = ['pytest', ]
 
 setup(
     author=__author__,
@@ -59,14 +51,14 @@ setup(
     install_requires=requirements,
     license="MIT license",
     long_description=readme + '\n\n' + history,
-    long_description_content_type='text/markdown',
+    long_description_content_type='text/x-rst',
     include_package_data=True,
-    # keywords='kinet2pcb KiCad EDA PCBNEW SKiDL',
+    keywords='HierPlace KiCad EDA PCBNEW',
     name='hierplace',
-    packages=find_packages(),
-    # setup_requires=setup_requirements,
-    # test_suite='tests',
-    # tests_require=test_requirements,
-    url='https://github.com/xesscorp/kinet2pcb',
+    packages=find_packages(include=['hierplace']),
+    setup_requires=setup_requirements,
+    test_suite='tests',
+    tests_require=test_requirements,
+    url='https://github.com/xesscorp/HierPlace',
     zip_safe=False,
 )
