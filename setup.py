@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 __author__ = 'XESS Corp.'
 __email__ = 'info@xess.com'
-__version__ = '0.3.6'
+__version__ = '0.3.2'
 
 # if 'sdist' in sys.argv[1:]:
 #     with open('kinet2pcb/pckg_info.py','w') as f:
@@ -21,9 +21,9 @@ with open('HISTORY.rst') as history_file:
 
 requirements = []
 
-setup_requirements = ['pytest-runner', ]
+setup_requirements = []
 
-test_requirements = ['pytest', ]
+test_requirements = []
 
 setup(
     author=__author__,
