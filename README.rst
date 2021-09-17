@@ -1,4 +1,4 @@
-XESS Hierarchical Placement Plugin
+Hierarchical Placement Plugin
 ==================================
 
 This PCBNEW plugin arranges the parts into groups that reflect the
@@ -54,10 +54,11 @@ Credits
 Development Lead
 ~~~~~~~~~~~~~~~~
 
--  XESS Corp. info@xess.com
+* Dave Vandenbout <devb@xess.com>
 
-Contributors
-~~~~~~~~~~~~
+`Other Contributors <https://github.com/devbisme/HierPlace/graphs/contributors>`_
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 None yet. Why not be the first?
 

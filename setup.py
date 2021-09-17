@@ -4,9 +4,9 @@
 import sys
 from setuptools import setup, find_packages
 
-__author__ = 'XESS Corp.'
-__email__ = 'info@xess.com'
-__version__ = '0.3.2'
+__author__ = 'Dave Vandenbout'
+__email__ = 'devb@xess.com'
+__version__ = '1.0.0'
 
 # if 'sdist' in sys.argv[1:]:
 #     with open('kinet2pcb/pckg_info.py','w') as f:
@@ -30,17 +30,14 @@ setup(
     author_email=__email__,
     version=__version__,
     classifiers=[
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Manufacturing",
+        "License :: OSI Approved :: MIT License",
+        "Natural Language :: English",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Topic :: Scientific/Engineering :: Electronic Design Automation (EDA)",
     ],
     description="Groups and arranges KiCAD PCBNEW board parts so they reflect the design hierarchy.",
     # entry_points={
@@ -59,6 +56,12 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://github.com/xesscorp/HierPlace',
+    project_urls={
+        "Documentation": "https://github.com/devbisme/HierPlace/blob/master/README.rst",
+        "Source": "https://github.com/devbisme/HierPlace",
+        "Changelog": "https://github.com/devbisme/HierPlace/blob/master/HISTORY.rst",
+        "Tracker": "https://github.com/devbisme/HierPlace/issues",
+    },
+    url='https://github.com/devbisme/HierPlace',
     zip_safe=False,
 )
