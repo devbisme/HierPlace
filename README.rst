@@ -57,7 +57,7 @@ Development Lead
 * Dave Vandenbout <devb@xess.com>
 
 `Other Contributors <https://github.com/devbisme/HierPlace/graphs/contributors>`_
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 None yet. Why not be the first?
