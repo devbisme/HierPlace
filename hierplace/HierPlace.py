@@ -27,10 +27,12 @@ Arranges components based upon the hierarchy of the design.
 
 from collections import defaultdict
 
+import builtins
 import sys
 sys.path.append('/usr/lib/python3/dist-packages')
 from pcbnew import *
 
+KICAD_VERSION = int(Version().split(".")[0])
 # Extra spacing placed around bounding boxes of modules and groups of modules
 # to provide visual separation.
 MODULE_SPACING = 350000
@@ -60,7 +62,7 @@ class Module(object):
 
     @property
     def bbox(self):
-        '''Return an EDA_RECT with the bounding box of the module.'''
+        '''Return an EDA_RECT or BOX2I with the bounding box of the module.'''
         try:
             bb = self.m.GetBoundingBox()
         except AttributeError:
@@ -126,7 +128,10 @@ class Module(object):
     def move(self, dx, dy):
         '''Move a module by the given distance in the X and Y directions.'''
         if not self.locked:
-            self.m.Move(wxPoint(dx, dy))
+            if KICAD_VERSION >= 7:
+                self.m.Move(VECTOR2I(dx, dy))
+            else:
+                self.m.Move(wxPoint(dx, dy))
 
     def set_bl_position(self, point):
         '''Set the position of the module's bottom-left corner to the given (X,Y) coordinate.'''
@@ -153,8 +158,11 @@ class ModuleGroup(list, Module):
 
     @property
     def bbox(self):
-        '''Return an EDA_RECT with the bounding box of the group of modules.'''
-        bbox = EDA_RECT()
+        '''Return an EDA_RECT or BOX2I with the bounding box of the group of modules.'''
+        if KICAD_VERSION >= 7:
+            bbox = BOX2I()
+        else:
+            bbox = EDA_RECT()
         bbox.Move(self[0].center)
         for module in self:
             bbox.Merge(module.bbox)
@@ -244,7 +252,7 @@ def pack(group):
                     # group of modules. The size is the sum of the height and width
                     # plus the difference between the height and width. This
                     # measure will attempt to keep the area small and square-like.
-                    size = packed_modules.h + packed_modules.w + abs(
+                    size = packed_modules.h + packed_modules.w + builtins.abs(
                         packed_modules.h - packed_modules.w)
 
                     # If this configuration is the smallest so far, store it.
