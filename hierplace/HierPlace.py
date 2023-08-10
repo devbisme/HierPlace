@@ -32,7 +32,12 @@ import sys
 sys.path.append('/usr/lib/python3/dist-packages')
 from pcbnew import *
 
-KICAD_VERSION = int(Version().split(".")[0])
+try:
+    KICAD_VERSION = int(Version().split(".")[0])
+except NameError:
+    # No version function, so assume this is KiCad 5.
+    KICAD_VERSION = 5
+
 # Extra spacing placed around bounding boxes of modules and groups of modules
 # to provide visual separation.
 MODULE_SPACING = 350000
@@ -159,9 +164,9 @@ class ModuleGroup(list, Module):
     @property
     def bbox(self):
         '''Return an EDA_RECT or BOX2I with the bounding box of the group of modules.'''
-        if KICAD_VERSION >= 7:
+        try:
             bbox = BOX2I()
-        else:
+        except NameError:
             bbox = EDA_RECT()
         bbox.Move(self[0].center)
         for module in self:
